@@ -1,0 +1,22 @@
+version: '3'
+services:
+  aicovergen:
+    image: aicovergen
+    container_name: aicovergen
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:7860:7860"
+    volumes:
+      - aicovergen_data:/app/AICoverGen
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  aicovergen_data:
